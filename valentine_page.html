@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Be My Valentine</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        text-align: center;
+        background: url('037384db-70ef-4623-b84b-7453710de361.jpg') no-repeat center center;
+        background-size: cover;
+    }
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+    }
+
+    .card {
+        position: relative;
+        z-index: 2;
+        background: rgba(255,255,255,0.9);
+        padding: 30px 20px;
+        border-radius: 20px;
+        max-width: 90%;
+        width: 350px;
+    }
+
+    h1 { color: red; }
+
+    button {
+        padding: 12px 25px;
+        font-size: 18px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    #yesBtn { background: red; color: white; }
+    #noBtn { background: black; color: white; }
+
+    #loveMessage {
+        display: none;
+        font-size: 36px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 10px red;
+        z-index: 3;
+        position: relative;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: red;
+        animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+        from { transform: translateY(-10vh); }
+        to { transform: translateY(110vh); }
+    }
+</style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="card" id="card">
+        <h1>Will you be my Valentine Rish? ❤️</h1>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <div id="loveMessage">You are now my forever Valentine Baby.<br>I love you more than words can say my Angel ❤️</div>
+
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+<script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const card = document.getElementById("card");
+    const msg = document.getElementById("loveMessage");
+
+    yesBtn.addEventListener("click", () => {
+        card.style.display = "none";
+        msg.style.display = "block";
+        startConfetti();
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    function startConfetti() {
+        for (let i = 0; i < 60; i++) {
+            const heart = document.createElement("div");
+            heart.classList.add("confetti");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.background = Math.random() > 0.5 ? "red" : "pink";
+            heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+            document.body.appendChild(heart);
+        }
+    }
+</script>
+</body>
+</html>
